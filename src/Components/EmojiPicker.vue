@@ -103,17 +103,27 @@
           }
 
           const bubble = binding.modifiers.bubble
+
           const handler = (e) => {
             if (bubble || (! el.contains(e.target) && el !== e.target)) {
               binding.value(e)
             }
-          }
-          el.__vueClickOutside__ = handler
+          };
 
-          (vNode.context.$window || document).addEventListener('click', handler)
+          el.__vueClickOutside__ = handler;
+
+          const document = (vNode.context.$window || document);
+
+          if (document.addEventListener) {
+            document.addEventListener('click', handler);
+          }
         },
         unbind(el, binding, vNode) {
-          (vNode.context.$window || document).removeEventListener('click', el.__vueClickOutside__)
+          const document = (vNode.context.$window || document);
+
+          if (document.addEventListener) {
+            document.removeEventListener('click', el.__vueClickOutside__);
+          }
 
           el.__vueClickOutside__ = null
         },
