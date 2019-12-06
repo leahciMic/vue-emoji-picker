@@ -1,10 +1,10 @@
 {
-  "name": "vue-emoji-picker",
+  "name": "vue-emoji-picker-leahcimic",
   "description": "Simple Vue.js emoji picker with unicode characters",
   "version": "1.0.2",
   "main": "dist-module/main.js",
   "scripts": {
-    "prepublish": "npm run build && npm run browser-build",
+    "prepublish": "npm run build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "browser-build": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/vue-emoji-picker.css ] -e src/main.js | uglifyjs -c warnings=false -m > dist/vue-emoji-picker.js"
