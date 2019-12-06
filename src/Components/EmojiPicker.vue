@@ -5,7 +5,7 @@
       :events="{ click: (e) => toggle(e) }"
     ></slot>
     <div
-      v-if="display.visible"
+      v-if="visible"
       v-click-outside="hide"
     >
       <slot
@@ -22,7 +22,15 @@
   import emojis from '../emojis'
 
   export default {
+    model: {
+      prop: 'visible',
+      event: 'toggleVisible',
+    },
     props: {
+      visible: {
+        type: Boolean,
+        default: false,
+      },
       search: {
         type: String,
         required: false,
@@ -41,7 +49,6 @@
         display: {
           x: 0,
           y: 0,
-          visible: false,
         },
       }
     },
@@ -75,16 +82,16 @@
         this.$emit('emoji', emoji)
       },
       toggle(e) {
-        this.display.visible = ! this.display.visible
+        this.$emit('toggleVisible', !this.visible);
         this.display.x = e.clientX
         this.display.y = e.clientY
       },
       hide() {
-        this.display.visible = false
+        this.$emit('toggleVisible', false);
       },
       escape(e) {
-        if (this.display.visible === true && e.keyCode === 27) {
-          this.display.visible = false
+        if (this.visible === true && e.keyCode === 27) {
+          this.hide();
         }
       },
     },
@@ -103,20 +110,20 @@
           }
           el.__vueClickOutside__ = handler
 
-          document.addEventListener('click', handler)
+          (this.$window || document).addEventListener('click', handler)
         },
         unbind(el, binding) {
-          document.removeEventListener('click', el.__vueClickOutside__)
+          (this.$window || document).removeEventListener('click', el.__vueClickOutside__)
 
           el.__vueClickOutside__ = null
         },
       },
     },
     mounted() {
-      document.addEventListener('keyup', this.escape)
+      (this.$window || document).addEventListener('keyup', this.escape)
     },
     destroyed() {
-      document.removeEventListener('keyup', this.escape)
+      (this.$window || document).removeEventListener('keyup', this.escape)
     },
   }
 </script>
