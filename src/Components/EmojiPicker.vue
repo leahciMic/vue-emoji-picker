@@ -110,10 +110,10 @@
           }
           el.__vueClickOutside__ = handler
 
-          (this.$window || document).addEventListener('click', handler)
+          (vNode.context.$window || document).addEventListener('click', handler)
         },
         unbind(el, binding) {
-          (this.$window || document).removeEventListener('click', el.__vueClickOutside__)
+          (vNode.context.$window || document).removeEventListener('click', el.__vueClickOutside__)
 
           el.__vueClickOutside__ = null
         },
