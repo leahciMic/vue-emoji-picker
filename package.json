@@ -1,7 +1,7 @@
 {
   "name": "vue-emoji-picker-leahcimic",
   "description": "Simple Vue.js emoji picker with unicode characters",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist-module/main.js",
   "scripts": {
     "prepublish": "npm run build",
