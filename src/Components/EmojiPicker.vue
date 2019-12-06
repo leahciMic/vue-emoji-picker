@@ -2,7 +2,7 @@
   <div>
     <slot
       name="emoji-invoker"
-      :events="{ click: (e) => toggle(e) }"
+      :events="{ click: toggle }"
     ></slot>
     <div
       v-if="visible"
